@@ -11,3 +11,5 @@ yarn-error.log
 logs
 
 node_modules
+
+dist
