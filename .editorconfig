@@ -1,0 +1,30 @@
+# 顶层 EditorConfig 配置文件
+# 告诉 EditorConfig 插件这是根文件，不用继续往上查找
+root = true
+
+# 匹配全部文件
+[*]
+# 指定字符集
+charset = utf-8
+# 指定换行符，可选 `lf`, `cr`, `crlf`
+end_of_line = lf
+# 去除行尾空格
+trim_trailing_whitespace = true
+# 文件结尾插入新行
+insert_final_newline = true
+
+# 匹配任意以 .js/.ts/.json/.js*/.ts*/.yml/.yaml/.html/.htm/.pug/.vue 结尾的文件
+[{.,}*.{{j,t}s{,*},y{a,}ml,htm{l,},pug,vue}]
+# 缩进风格设置为空格，可选 `space`, `tab`
+indent_style = space
+# 缩进的空格数设置为 2 个
+indent_size = 2
+
+# 匹配任意以 .md/.txt 结尾的文件
+[*.{md,txt}]
+indent_style = space
+indent_size = 4
+# markdown 文件通常以行尾 2 个空格作为换行标记，因此不配置去除行尾空格规则
+trim_trailing_whitespace = false
+# 单行最大长度，设置为 0 时不限制
+max_line_length = 0

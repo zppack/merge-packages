@@ -1,0 +1,57 @@
+{
+  "name": "merge-packages",
+  "version": "0.1.0",
+  "description": "Very intelligently merge `package.json` files. 2021 UP_TO_DATE VERSION OF THIS TOOL.",
+  "keywords": [
+    "package.json",
+    "merge package",
+    "merge-package",
+    "package-merge",
+    "package merge",
+    "merge json"
+  ],
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "",
+    "prebuild": "npm run clean",
+    "build": "babel src -d dist",
+    "clean": "rimraf dist",
+    "prepare": "npm run build",
+    "release": "standard-version && npm publish",
+    "release:first": "standard-version --first-release && npm publish",
+    "postrelease": "git push && git push origin --tags",
+    "postrelease:first": "git push && git push origin --tags",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/zppack/merge-packages.git"
+  },
+  "author": "John Chan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zppack/merge-packages/issues"
+  },
+  "homepage": "https://github.com/zppack/merge-packages",
+  "dependencies": {
+    "@voxpelli/semver-set": "^2.0.1",
+    "jju": "^1.4.0",
+    "ramda": "^0.27.1",
+    "semver": "^7.3.4",
+    "sort-package-json": "^1.49.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "rimraf": "^3.0.2",
+    "standard-version": "^9.1.1"
+  },
+  "engines": {
+    "node": ">=12",
+    "npm": ">=6"
+  }
+}
