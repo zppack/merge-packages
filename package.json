@@ -38,6 +38,9 @@
   "homepage": "https://github.com/zppack/merge-packages",
   "dependencies": {
     "@voxpelli/semver-set": "^2.0.1",
+    "commander": "^7.2.0",
+    "fs-extra": "^9.1.0",
+    "glob": "^7.1.6",
     "jju": "^1.4.0",
     "ramda": "^0.27.1",
     "semver": "^7.3.4",
