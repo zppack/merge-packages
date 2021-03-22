@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import program from 'commander';
 import glob from 'glob';
 import path from 'path';
