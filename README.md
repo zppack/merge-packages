@@ -3,6 +3,8 @@
 Very intelligently merge `package.json` files. 2021 UP_TO_DATE VERSION OF THIS TOOL.
 
 [![NPM](https://nodei.co/npm/merge-packages.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/merge-packages/)
+
+
 [![npm package](https://img.shields.io/npm/v/merge-packages.svg)](https://www.npmjs.org/package/merge-packages)
 [![npm download](https://img.shields.io/npm/dt/merge-packages.svg)](https://www.npmjs.org/package/merge-packages)
 [![github license](https://img.shields.io/github/license/zppack/merge-packages.svg)](https://github.com/zppack/merge-packages/blob/master/LICENSE)
@@ -18,7 +20,7 @@ Very intelligently merge `package.json` files. 2021 UP_TO_DATE VERSION OF THIS T
 - [x] combine `description` field's value
 - [x] retain some fields of the first `package.json`
 - [x] sort the merged `package.json` fields
-- [ ] provide cli tools
+- [x] provide cli tools
 
 ## Start
 
@@ -33,6 +35,37 @@ yarn add merge-packages
 ```
 
 ### Usage
+
+#### CLI
+
+##### merge-packages [options] [pkgs...]
+
+  - **pkgs**
+    Argument `pkgs` is the files or directories to merge.
+    When passing a directory, a minimatch expression `package*(.*).json` will be used to match files except `package.merged.json`.
+    If no arguments passed, the result will be like passing a directory `./`;
+
+  - **options**
+
+    - **output**: The output filename. Default to `package.merged.json`. If already exists, will use filename `package.merged1.json`, and the like.
+
+##### Install globally
+
+```sh
+npm install --global merge-packages
+
+merge-packages -h
+
+merge-packages package.a.json package.b.json packagesSubDir
+```
+
+##### NPX
+
+```sh
+npx merge-packages -h
+```
+
+#### Node
 
 - Merge two `package.json` files
 

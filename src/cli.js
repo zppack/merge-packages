@@ -6,7 +6,7 @@ import merge from '.';
 import pkg from  '../package.json';
 
 const argsHelpText = `The package.json files or directories to merge.
-When passing a directory, a minimatch expresion \`package*(.*).json\` -
+When passing a directory, a minimatch expression \`package*(.*).json\` -
 - will be used to match files except \`package.merged.json\`.
 If no arguments passed, the result will be like passing a directory \`./\` .
 `;
