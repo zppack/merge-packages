@@ -11,6 +11,7 @@
     "merge json"
   ],
   "main": "dist/index.js",
+  "module": "dist/index.ejs",
   "files": [
     "dist"
   ],
