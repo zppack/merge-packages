@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/zppack/merge-packages/compare/v0.1.2...v0.1.3) (2021-04-14)
+
+
+### Features
+
+* using rollup to do eslint and terser ([179f9ef](https://github.com/zppack/merge-packages/commit/179f9efa849ef71303d7861c25d9c3e0665706ae))
+
 ### [0.1.2](https://github.com/zppack/merge-packages/compare/v0.1.1...v0.1.2) (2021-03-22)
 
 
