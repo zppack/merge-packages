@@ -18,13 +18,15 @@
   "scripts": {
     "start": "",
     "prebuild": "npm run clean",
-    "build": "babel src -d dist",
+    "build": "rollup -c",
     "clean": "rimraf dist",
     "prepare": "npm run build",
     "release": "standard-version && npm publish",
     "release:first": "standard-version --first-release && npm publish",
     "postrelease": "git push && git push origin --tags",
     "postrelease:first": "git push && git push origin --tags",
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -51,7 +53,16 @@
     "@babel/cli": "^7.13.10",
     "@babel/core": "^7.13.10",
     "@babel/preset-env": "^7.13.10",
+    "@rollup/plugin-json": "^4.1.0",
+    "eslint": "^7.24.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
     "rimraf": "^3.0.2",
+    "rollup": "^2.45.2",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-eslint": "^7.0.0",
+    "rollup-plugin-preserve-shebangs": "^0.2.0",
+    "rollup-plugin-terser": "^7.0.2",
     "standard-version": "^9.1.1"
   },
   "engines": {

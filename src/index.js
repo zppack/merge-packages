@@ -16,19 +16,18 @@ const handlers = {
 };
 
 function mergeString(prev = '', next = '') {
-  return prev ? prev : next;
+  return prev || next;
 }
 
 function replaceString(prev = '', next = '') {
-  return next ? next : prev;
+  return next || prev;
 }
 
 function appendString(prev = '', next = '') {
   if (prev && next) {
     return `${prev} ${next}`;
-  } else {
-    return prev || next;
   }
+  return prev || next;
 }
 
 function mergeList(prev = [], next = []) {
@@ -42,7 +41,7 @@ function mergeList(prev = [], next = []) {
 }
 
 function mergeObject(prev = {}, next = {}) {
-  return Object.assign({}, prev, next);
+  return { ...prev, ...next };
 }
 
 // The `bin` field is really special in package.json:
@@ -56,7 +55,7 @@ function mergeBin(prev = {}, next = {}, prevPkg = {}, nextPkg = {}) {
   if (typeof prev === 'string') {
     if (prevPkg.name) {
       prev = {
-        [prevPkg.name]: prev
+        [prevPkg.name]: prev,
       };
     } else {
       // string typed `bin` need a package name, else it's discarded.
@@ -67,13 +66,13 @@ function mergeBin(prev = {}, next = {}, prevPkg = {}, nextPkg = {}) {
   if (typeof next === 'string') {
     if (nextPkg.name) {
       next = {
-        [nextPkg.name]: next
+        [nextPkg.name]: next,
       };
     } else {
       next = {};
     }
   }
-  const res = Object.assign({}, prev);
+  const res = { ...prev };
   // merge two bins
   Object.keys(next).forEach((key) => {
     // retain same name command by rename `bin` key
@@ -87,7 +86,7 @@ function mergeBin(prev = {}, next = {}, prevPkg = {}, nextPkg = {}) {
 }
 
 function mergeRepository(prev = '', next = {}) {
-  return prev ? prev : next;
+  return prev || next;
 }
 
 function mergeDependencies(prev = {}, next = {}) {
@@ -101,7 +100,7 @@ function mergeDependencies(prev = {}, next = {}) {
   return mergeObject(prev, R.mapObjIndexed((version, depName) => {
     // We need to check if both are indeed semver ranges in order to do intersects
     // – some may be git urls or other such things.
-    var isSem = validRange(version) && validRange(prev[depName]);
+    const isSem = validRange(version) && validRange(prev[depName]);
     return isSem ? (intersect(version, prev[depName]) || version) : version;
   }, next));
 }
@@ -121,24 +120,25 @@ export function mergeJson(prevPkg = {}, nextPkg = {}) {
 
       if (Reflect.has(handlers, key)) {
         return handlers[key](prevVal, nextVal, prevPkg, nextPkg);
-      } else {
-        const prevType = typeof prevVal;
-        const nextType = typeof nextVal;
-        // string array object
-        if (Array.isArray(prevVal) || Array.isArray(nextVal)) {
-          // anyone is array type
-          return mergeList(prevVal, nextVal);
-        } else if (prevType === 'string' && nextType === 'string') {
-          // both are string types
-          return mergeString(prevVal, nextVal);
-        } else if (prevType === 'object' && nextType === 'object') {
-          // both are object types
-          return mergeObject(prevVal, nextVal);
-        } else {
-          console.warn(`Package Merge Warning: the field "${key}" in two packages are not the same type. (types: ${prevType},${nextType})`);
-          return nextVal;
-        }
       }
+
+      const prevType = typeof prevVal;
+      const nextType = typeof nextVal;
+      // string array object
+      if (Array.isArray(prevVal) || Array.isArray(nextVal)) {
+        // anyone is array type
+        return mergeList(prevVal, nextVal);
+      }
+      if (prevType === 'string' && nextType === 'string') {
+        // both are string types
+        return mergeString(prevVal, nextVal);
+      }
+      if (prevType === 'object' && nextType === 'object') {
+        // both are object types
+        return mergeObject(prevVal, nextVal);
+      }
+      console.warn(`Package Merge Warning: the field "${key}" in two packages are not the same type. (types: ${prevType},${nextType})`);
+      return nextVal;
     }, nextPkg));
   }
   return sortPackageJson(finalPkg);
@@ -147,5 +147,6 @@ export function mergeJson(prevPkg = {}, nextPkg = {}) {
 const jjuOpts = { mode: 'json' };
 
 export default function mergeJsonStr(prevPkgStr, nextPkgStr) {
+  // eslint-disable-next-line max-len
   return sortPackageJson(jju.update(prevPkgStr, mergeJson(jju.parse(prevPkgStr, jjuOpts), jju.parse(nextPkgStr, jjuOpts)), jjuOpts));
 }
