@@ -1,5 +1,5 @@
 import validRange from 'semver/ranges/valid';
-import { intersect } from '@voxpelli/semver-set';
+import { semverIntersect } from '@voxpelli/semver-set';
 import jju from 'jju';
 import R from 'ramda';
 import { sortPackageJson } from 'sort-package-json';
@@ -101,7 +101,7 @@ function mergeDependencies(prev = {}, next = {}) {
     // We need to check if both are indeed semver ranges in order to do intersects
     // – some may be git urls or other such things.
     const isSem = validRange(version) && validRange(prev[depName]);
-    return isSem ? (intersect(version, prev[depName]) || version) : version;
+    return isSem ? (semverIntersect(version, prev[depName]) || version) : version;
   }, next));
 }
 
