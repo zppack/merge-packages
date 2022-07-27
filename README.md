@@ -43,11 +43,11 @@ yarn add merge-packages
   - **pkgs**
     Argument `pkgs` is the files or directories to merge.
     When passing a directory, a minimatch expression `package*(.*).json` will be used to match files except `package.merged.json`.
-    If no arguments passed, the result will be like passing a directory `./`;
+    If no arguments passed, it will work as passing a directory `./`;
 
   - **options**
 
-    - **output**: The output filename. Default to `package.merged.json`. If already exists, will use filename `package.merged1.json`, and the like.
+    - **output**: The output filename. Default to `package.merged.json`. If already exists, it will use filename `package.merged1.json` and stuff.
 
 ##### Install globally
 
