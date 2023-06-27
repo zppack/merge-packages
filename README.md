@@ -71,7 +71,7 @@ npx merge-packages -h
 
 ```javascript
 import fs from 'fs';
-import mergePackages from 'merge-package';
+import mergePackages from 'merge-packages';
 
 const pkgStr1 = fs.readFileSync('./a/package.json', 'utf8');
 const pkgStr2 = fs.readFileSync('./b/package.json', 'utf8');
@@ -84,7 +84,7 @@ fs.writeFileSync('./package.json', mergedPkgStr);
 - Merge two `package.json` objects
 
 ```javascript
-import { mergeJson } from 'merge-package';
+import { mergeJson } from 'merge-packages';
 
 const pkg1 = {
     name: 'my-package',
